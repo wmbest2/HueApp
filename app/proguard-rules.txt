@@ -1,0 +1,101 @@
+# Add project specific ProGuard rules here.
+# By default, the flags in this file are appended to flags specified
+# in $ANDROID_HOME/tools/proguard/proguard-android.txt
+# You can edit the include path and order by changing the ProGuard
+# include property in project.properties.
+#
+# For more details, see
+#   http://developer.android.com/guide/developing/tools/proguard.html
+-verbose
+#-dontobfuscate
+-printmapping dexguard_map.txt
+#-applymapping dexguard_map.txt
+
+# Keep line number and rename file
+-renamesourcefileattribute SourceFile
+-keepattributes SourceFile,LineNumberTable
+
+## Fantasy Flip
+-keepnames class com.vokal.w49er.model.** { *; }
+
+-keepnames class java.util.** { *; }
+
+## VOKAL
+-keep class barstool.** { *; }
+-keep class com.vokal.db.** { *; }
+-keep class com.vokal.volley.** { *; }
+
+## GOOGLE
+-keepnames class com.google.** { *; }
+
+## Facebook
+-keepnames class com.facebook.** { *; }
+
+## Android Support
+-keep class android.support.v7.** { *; }
+-keep class android.support.v4.** { *; }
+-dontwarn android.support.v4.**
+-dontwarn android.support.v7.**
+
+## Google Play Services (more in dexguard-common.pro)
+-keep class * extends java.util.ListResourceBundle {
+    protected Object[][] getContents();
+}
+
+## Gson
+-keepattributes Signature
+-keep class sun.misc.Unsafe { *; }
+-keep class com.google.gson.stream.** { *; }
+-keep class com.google.gson.reflect.** { *; }
+
+## Volley
+-keep class com.android.volley.** { *; }
+
+## Butterknife (more in dexguard-common.pro)
+-keep class butterknife.** { *; }
+-keep @interface butterknife.InjectView*
+-keep @interface butterknife.On*
+-keepclassmembers class * {
+    @butterknife.** *;
+}
+-keepclasseswithmembernames class * {
+    @butterknife.InjectView* <fields>;
+}
+
+## Dagger
+-dontwarn dagger.internal.codegen.**
+-keepclassmembers class * {
+    @javax.inject.** *;
+    @javax.inject.** <fields>;
+    @javax.inject.** <init>(...);
+    @dagger.** *;
+    !private <init>();
+}
+-keep class dagger.** { *; }
+-keep class javax.inject.** { *; }
+-keep class * extends dagger.internal.Binding
+-keep class * extends dagger.internal.ModuleAdapter
+-keep class * extends dagger.internal.StaticInjection
+
+## Otto
+-keepclassmembers class ** {
+    @com.squareup.otto.Subscribe public *;
+    @com.squareup.otto.Produce public *;
+}
+
+## Mimecraft
+-keep class com.squareup.** { *; }
+
+## Splunk
+-keep class com.splunk.** { *; }
+
+## MixPanel
+-keep class com.mixpanel.** { *; }
+
+# Don't Warn Libs
+-dontwarn dagger.internal.**
+-dontwarn com.squareup.**
+-dontwarn com.google.**
+-dontwarn org.hamcrest.**
+-dontwarn com.mixpanel.**
+-dontwarn okio.**

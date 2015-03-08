@@ -1,0 +1,80 @@
+apply plugin: 'com.android.application'
+apply plugin: 'rats'
+
+if (file('signing.gradle').exists()) {
+    apply from: 'signing.gradle'
+}
+
+def headCommitCount() {
+    def cmd = "git rev-list HEAD --count"
+    return cmd.execute().text.toInteger()
+}
+
+android {
+    compileSdkVersion 21
+    buildToolsVersion '21.1.2'
+
+    defaultConfig {
+        applicationId 'com.wmbest.hue'
+        minSdkVersion 16
+        targetSdkVersion 21 
+        versionCode headCommitCount() //Auto-increment the version based on how many commits have occurred.
+        versionName "1.0.0 (" + versionCode + ")"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    packagingOptions {
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+        exclude 'LICENSE.txt'
+    }
+
+    lintOptions {
+        disable 'InvalidPackage'
+        enable 'IconExpectedSize', 'SelectableText', 'UnusedIds', 'StopShip', 'GradleDynamicVersion'
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+
+    dexOptions {
+        preDexLibraries false
+    }
+}
+
+dependencies {
+    compile 'com.android.support:support-v4:21.0.3'
+    compile 'com.android.support:appcompat-v7:21.0.2'
+    compile 'com.android.support:recyclerview-v7:21.0.2'
+    compile 'com.jakewharton:butterknife:5.1.1'
+    compile 'com.squareup.dagger:dagger-compiler:1.2.2'
+    compile 'com.squareup.dagger:dagger:1.2.2'
+
+    compile "com.google.android.gms:play-services:6.5.87"
+
+    compile 'com.squareup.okhttp:okhttp-urlconnection:2.0.0'
+    compile 'com.squareup.okhttp:okhttp:2.0.0'
+
+    compile 'com.squareup.retrofit:retrofit:1.9.0'
+    compile 'com.squareup:otto:1.3.5'
+    compile 'com.squareup.picasso:picasso:2.3.3'
+
+    //Testing
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.0'
+    androidTestCompile 'com.android.support.test:testing-support-lib:0.1'
+    androidTestCompile ('com.android.support.test.espresso:espresso-contrib:2.0') {
+        exclude group: 'com.android.support', module: 'appcompat'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude module: 'recyclerview-v7'
+    }
+}
+
+rats {
+    user "rats"
+    password "R4t5Test"
+    server "http://vokalrats.ngrok.com"
+    count 5
+    message "git log --oneline HEAD^..HEAD".execute().text
+}
