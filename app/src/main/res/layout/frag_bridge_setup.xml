@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="24dip"
+    >
+    <TextView
+        android:id="@+id/guide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/description"
+        android:textColor="@android:color/black"
+        android:layout_centerHorizontal="true"
+        />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/guide"
+        android:layout_above="@+id/next"
+        >
+        
+        <com.rey.material.widget.ProgressView
+            android:id="@+id/progress"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:background="@color/teal_500"
+            app:pv_circular="true"
+            app:pv_progressStyle="@style/ColorsCircularProgressDrawableStyle"
+            app:pv_progressMode="indeterminate"
+            />
+    </FrameLayout>
+    <com.rey.material.widget.Button
+        android:id="@id/next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/next_button"
+        android:background="@color/amber_a700"
+        android:textColor="@color/grey_900"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        app:ripple="@style/FlatColorButtonRippleStyle"
+        />
+</RelativeLayout>

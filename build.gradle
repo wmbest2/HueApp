@@ -1,9 +1,12 @@
 buildscript {
     repositories {
         jcenter()
+        mavenCentral()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:1.0.0'
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:0.11.91'
+        classpath 'org.jetbrains.kotlin:kotlin-android-extensions:0.11.91.1'
         classpath 'com.wmbest.gradle:rats:0.2.1'
 
         // NOTE: Do not place your application dependencies here; they belong
