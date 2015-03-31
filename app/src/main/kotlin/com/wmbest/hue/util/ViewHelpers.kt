@@ -20,7 +20,7 @@ fun View.gone() {
 }
 
 fun View.hide() {
-    this.setVisibility(View.VISIBLE);
+    this.setVisibility(View.INVISIBLE);
 }
 
 fun View.show() {
