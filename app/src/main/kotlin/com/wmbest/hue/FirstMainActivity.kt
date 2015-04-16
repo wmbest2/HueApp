@@ -8,7 +8,11 @@ import kotlinx.android.synthetic.activity_main.*
 import com.wmbest.hue.fragments.*
 import com.wmbest.hue.util.*
 
-class MainActivity : ActionBarActivity() {
+import com.wmbest.traits.Animal;
+import com.wmbest.traits.Duck;
+import com.wmbest.traits.Swimmer;
+
+class FirstMainActivity : ActionBarActivity() {
 
     override fun onCreate(state: Bundle?) {
         super.onCreate(state)
@@ -16,9 +20,8 @@ class MainActivity : ActionBarActivity() {
         setSupportActionBar(toolbar)
 
         if (state == null) {
-            fm {
-                replace(R.id.container, BridgeSetupFragment(), "setup")
-            }
+            replace(R.id.container, BridgeSetupFragment(), "setup")
+                .commit()
         }
     } 
 } 

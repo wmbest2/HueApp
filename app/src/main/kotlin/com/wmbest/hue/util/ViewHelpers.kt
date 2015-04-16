@@ -10,9 +10,21 @@ fun ActionBarActivity.replace(id: Int, frag: Fragment, tag: String): FragmentTra
         .replace(id, frag, tag)
 }
 
+fun ActionBarActivity.fm(body: FragmentTransaction.() -> Unit) {
+    val trans = getSupportFragmentManager().beginTransaction()
+    trans.body()
+    trans.commit()
+}
+
 fun Fragment.replace(id: Int, frag: Fragment, tag: String): FragmentTransaction {
     return getFragmentManager().beginTransaction()
         .replace(id, frag, tag)
+}
+
+fun Fragment.fm(body: FragmentTransaction.() -> Unit) {
+    val trans = getFragmentManager().beginTransaction()
+    trans.body()
+    trans.commit()
 }
 
 fun View.gone() {
